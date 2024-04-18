@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package grpcapi;
+
+// 生成go文件的包
+option go_package = ".;grpcapi";
+
+// 被植入机的C2 API函数
+service Implant{
+  rpc FetchCommand (Empty) returns (Command);
+  rpc SendOutput (Command) returns (Empty);
+}
+
+// 服务器的C2 API函数
+service Admin{
+  rpc RunCommand (Command) returns (Command);
+}
+
+// 定义指令消息结构，In即输入指令本身，Out即命令输出结果
+message Command{
+  string In = 1;
+  string Out = 2;
+}
+
+// 空消息定义为NULL
+message Empty{
+}
+
+// 执行 protoc --go_out=. --go-grpc_out=. *.proto

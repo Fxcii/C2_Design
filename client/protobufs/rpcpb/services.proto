@@ -1,0 +1,13 @@
+syntax = "proto3";
+package rpcpb;
+option go_package = ".;rpcpb";
+
+import "commonpb/common.proto";
+import "sliverpb/sliver.proto";
+import "clientpb/client.proto";
+
+service SliverRPC{
+  rpc Kill(sliverpb.KillReq) returns (commonpb.Empty);
+  rpc GetBeacons(commonpb.Empty) returns (clientpb.Beacons);
+  rpc GetBeacon(clientpb.Beacon) returns (clientpb.Beacon);
+}

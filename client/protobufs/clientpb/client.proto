@@ -1,0 +1,95 @@
+syntax = "proto3";
+package clientpb;
+
+option go_package = ".;clientpb";
+import "commonpb/common.proto";
+
+message Session {
+  string ID = 1;
+  string Name = 2;
+  string Hostname = 3;
+  string UUID = 4;
+  string Username = 5;
+  string UID = 6;
+  string GID = 7;
+  string OS = 8;
+  string Arch = 9;
+  string Transport = 10;
+  string RemoteAddress = 11;
+  int32 PID = 12;
+  string Filename = 13; // Argv[0]
+  int64 LastCheckin = 14;
+  string ActiveC2 = 15;
+  string Version = 16;
+  bool Evasion = 17;
+  bool IsDead = 18;
+  int64 ReconnectInterval = 19;
+  string ProxyURL = 20;
+  bool Burned = 22;
+  repeated string Extensions = 23;
+  // string ConfigID = 24;
+  int64 PeerID = 25;
+  string Locale = 26;
+  int64 FirstContact = 27;
+  string Integrity = 28;
+}
+
+message Beacon {
+  string ID = 1;
+  string Name = 2;
+  string Hostname = 3;
+  string UUID = 4;
+  string Username = 5;
+  string UID = 6;
+  string GID = 7;
+  string OS = 8;
+  string Arch = 9;
+  string Transport = 10;
+  string RemoteAddress = 11;
+  int32 PID = 12;
+  string Filename = 13; // Argv[0]
+  int64 LastCheckin = 14;
+  string ActiveC2 = 15;
+  string Version = 16;
+  bool Evasion = 17;
+  bool IsDead = 18;
+
+  string ProxyURL = 20;
+  int64 ReconnectInterval = 21;
+  int64 Interval = 22;
+  int64 Jitter = 23;
+  bool Burned = 24;
+  int64 NextCheckin = 25;
+
+  int64 TasksCount = 26;
+  int64 TasksCountCompleted = 27;
+
+  string Locale = 28;
+  int64 FirstContact = 29;
+
+  string Integrity = 30;
+}
+
+message Beacons { repeated Beacon Beacons = 2; }
+
+message BeaconTask {
+  string ID = 1;
+  string BeaconID = 2;
+  int64 CreatedAt = 3;
+  string State = 4;
+  int64 SentAt = 5;
+  int64 CompletedAt = 6;
+  bytes Request = 7;
+  bytes Response = 8;
+  string Description = 9;
+}
+
+message BeaconTasks {
+  string BeaconID = 1;
+  repeated BeaconTask Tasks = 2;
+}
+
+message BeaconIntegrity {
+  string BeaconID = 1;
+  string Integrity = 2;
+}
